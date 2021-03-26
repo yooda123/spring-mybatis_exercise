@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<th:block th:insert="fragments/base :: header"></th:block>
+<title>Insert title here</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <h4>MyBatis APP</h4>
+
+    <table class="table" th:if ="${page.size > 0}">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>名前</th>
+          <th>E-Mail</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="teacher1 : ${page}" th:object="${teacher1}">
+          <td th:text="*{id}"></td>
+          <td th:text="*{name}"></td>
+          <td th:text="*{email}"></td>
+          <td class="py-1">
+          	<a th:href="@{/edit/{id}(id=*{id})}" class="btn btn-outline-primary">
+          		<i class="fa fa-trash"></i>
+          		編集
+          	</a>
+          	<a th:href="@{/delete/{id}(id=*{id})}" class="btn btn-outline-danger">
+          		<i class="fa fa-trash"></i>
+          		削除
+          	</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+	<div class="row">
+		<div class="col-auto mr-auto">
+			<a th:href="@{/add}" class="btn btn-ouotline-primary">
+				<i class="fa fa-plus"></i>
+				新規追加
+			</a>
+		</div>
+	</div>
+
+  </div>
+
+  <th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>
