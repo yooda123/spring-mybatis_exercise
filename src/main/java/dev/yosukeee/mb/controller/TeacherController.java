@@ -1,5 +1,7 @@
 package dev.yosukeee.mb.controller;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +22,8 @@ public class TeacherController {
 	private final TeacherService service;
 	
 	@GetMapping("/")
-	public String getAllTeachers(Model model) {
-		model.addAttribute("page", service.findAll());
+	public String getAllTeachers(Model model, @PageableDefault(size=5) Pageable pageable) {
+		model.addAttribute("page", service.findAll(pageable));
 		return "list";
 	}
 	
